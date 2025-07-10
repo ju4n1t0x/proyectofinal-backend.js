@@ -1,0 +1,79 @@
+[
+    {
+      
+      "titulo": "Smartphone UltraPro X",
+      "descripcion": "El último smartphone con cámara de 108MP y batería de larga duración.",
+      "precio": 999.99,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Smartphone UltraPro X",
+      "descripcion": "El último smartphone con cámara de 108MP y batería de larga duración.",
+      "precio": 999.99,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Laptop Gaming GeForce",
+      "descripcion": "Potente laptop para gaming con RTX 4080 y procesador i9 de última generación.",
+      "precio": 1850.00,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Auriculares Inalámbricos SoundMax",
+      "descripcion": "Auriculares con cancelación de ruido activa y sonido envolvente.",
+      "precio": 149.99,
+      "disponibilidad": false
+    },
+    {
+      
+      "titulo": "Smartwatch FitPulse 2.0",
+      "descripcion": "Monitor de actividad con GPS, ritmo cardíaco y notificaciones inteligentes.",
+      "precio": 79.99,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Tablet ProDraw 12",
+      "descripcion": "Tablet de alta resolución ideal para diseño gráfico y productividad.",
+      "precio": 629.50,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Teclado Mecánico RGB",
+      "descripcion": "Teclado gaming con switches mecánicos y retroiluminación RGB personalizable.",
+      "precio": 85.00,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Mouse Ergonómico Wireless",
+      "descripcion": "Mouse inalámbrico con diseño ergonómico para largas horas de uso.",
+      "precio": 35.99,
+      "disponibilidad": false
+    },
+    {
+      
+      "titulo": "Cámara Mirrorless FusionShot",
+      "descripcion": "Cámara profesional con sensor full-frame y grabación de video 4K.",
+      "precio": 1200.00,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Router Wi-Fi 6 de Alta Velocidad",
+      "descripcion": "Router de última generación con tecnología Wi-Fi 6 para conexiones ultrarrápidas.",
+      "precio": 110.00,
+      "disponibilidad": true
+    },
+    {
+      
+      "titulo": "Disco Duro Externo 2TB USB 3.0",
+      "descripcion": "Almacenamiento portátil de alta capacidad para tus archivos importantes.",
+      "precio": 65.50,
+      "disponibilidad": true
+    }
+  ]
