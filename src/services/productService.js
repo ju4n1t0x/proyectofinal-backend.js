@@ -19,8 +19,6 @@ static deleteProduct = async(id) => {
     return await Producto.deleteProduct(id);
 };
 
-static updateProduct = async(id, product) => {
-    return await Producto.updateProduct(id, product);
-};
+
 
 }

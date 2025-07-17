@@ -42,14 +42,7 @@ static deleteProduct = async (id) =>{
     return true;
 };
 
-static updateProduct = async (id, product) =>{
-    const productById = await getDoc(doc(productsCollection, id));
-    if(!productById.exists()){
-        throw new Error('Producto no encontrado');
-    }
-    await updateDoc(doc(productsCollection, id), product);
-    return true;
-}
+
 };
 
 
