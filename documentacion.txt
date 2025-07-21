@@ -1,169 +1,170 @@
 
 # Documentación del Proyecto: API de Gestión de Productos y Usuarios
 
-## 1. Resumen del Proyecto
+1. Resumen del Proyecto
 
-Este documento detalla la arquitectura, funcionalidades y endpoints de la API RESTful desarrollada para la gestión de productos y autenticación de usuarios. El objetivo principal del proyecto es proveer una interfaz backend robusta, segura y escalable para una aplicación de comercio electrónico o similar.
+Este documento detalla la arquitectura, funcionalidades y endpoints de la API RESTful desarrollada para la gestión de productos y autenticación de usuarios. 
+El objetivo es seguir los lineamientos de la consigna planteada y crear una api rest que pueda proveer una interfaz escalable, segura y confiable.
 
----
 
-## 2. Tecnologías Utilizadas
+
+ 2. Tecnologías Utilizadas
 
 *   **Backend:** Node.js
 *   **Framework:** Express.js
-*   **Base de Datos:** [Indicar la base de datos, ej: MongoDB, Firebase Firestore, PostgreSQL]
+*   **Base de Datos:** Firebase Firestore
 *   **Autenticación:** JSON Web Tokens (JWT)
 *   **Variables de Entorno:** dotenv
-*   **Gestor de Paquetes:** [Indicar npm o pnpm]
+*   **Gestor de Paquetes:** pnpm
 
----
 
-## 3. Estructura del Proyecto
+
+ 3. Estructura del Proyecto
 
 El proyecto sigue una arquitectura por capas para separar responsabilidades y facilitar el mantenimiento.
 
-```
+
 /src
-|-- /config -> Configuración central (ej. variables de entorno).
-|-- /controllers -> Lógica de negocio y manejo de peticiones (req, res).
-|-- /middlewares -> Funciones intermedias (ej. autenticación, CORS).
-|-- /models -> Definición de los esquemas de datos.
-|-- /routes -> Definición de las rutas de la API.
-|-- /services -> Lógica de interacción con la base de datos.
-|-- /utils -> Utilidades reutilizables (ej. generador de tokens).
-```
+|-- /config -> Configuracion de las variables de entorno
+|-- /controllers -> Logica de negocio y manejo de peticiones req y res
+|-- /middlewares -> Autenticaciones y Cors
+|-- /models -> Definicion de los modelos de datos a implementar, tanto para productos como para usuarios, validaciones de tipo
+|-- /routes -> Definicion de las rutas para la Api y especificaciones de rutas protegidas con autenticacion
+|-- /services -> Logica para interactuar con la base de datos, abstraemos a los modelos y los controllers
+|-- /utils -> Utilidades, generador de tokens
 
----
 
-## 4. Instalación y Puesta en Marcha
 
-1.  **Clonar el repositorio:**
+
+ 4. Instalación y Puesta en Marcha
+
+1.  Clonar el repositorio:
     ```bash
     git clone [URL_DEL_REPOSITORIO]
-    ```
-2.  **Instalar dependencias:**
+    
+2.  Instalar dependencias:
     ```bash
     pnpm install
-    ```
-3.  **Configurar variables de entorno:**
+    `
+3.  Configurar variables de entorno:
     Crear un archivo `.env` en la raíz del proyecto y añadir las siguientes variables:
-    ```
-    PORT=8080
-    MONGO_URL=[URL_DE_CONEXION_A_LA_BASE_DE_DATOS]
+    
+    FIREBASE_TYPE=
+    FIREBASE_PROJECT_ID=
+    FIREBASE_PRIVATE_KEY_ID=
+    FIREBASE_PRIVATE_KEY=
+    FIREBASE_CLIENT_EMAIL=
+    FIREBASE_CLIENT_ID=
+    FIREBASE_AUTH_URI=
+    FIREBASE_TOKEN_URI=
+    FIREBASE_AUTH_PROVIDER_X509_CERT_URL=
+    IREBASE_CLIENT_X509_CERT_URL=
+    PORT=1234
     JWT_SECRET_KEY=[UNA_CLAVE_SECRETA_PARA_JWT]
-    ```
-4.  **Iniciar el servidor:**
+    
+4.  niciar el servidor:
     ```bash
     pnpm start
-    ```
+    
 
 ---
 
-## 5. Endpoints de la API
+5. Endpoints de la API
 
 A continuación se describen los endpoints disponibles.
 
-### 5.1. Autenticación (`/api/auth`)
+5.1. Autenticación (`/api/auth`)
 
-#### **POST /api/auth/register**
-*   **Descripción:** Registra un nuevo usuario en el sistema.
-*   **Body (raw/json):**
-    ```json
+    POST /api/register
+        Descripción: Registra un nuevo usuario en el sistema.
+        Body (raw/json):
+    
     {
         "nombre": "Juan Perez",
         "email": "juan.perez@example.com",
         "password": "password123"
     }
-    ```
-*   **Respuesta Exitosa (201 Created):**
-    ```json
+   
+      Respuesta Exitosa (200 Created):
+    
     {
         "message": "Usuario creado con éxito",
         "payload": { ...datos del usuario ... }
     }
-    ```
+   
 
-#### **POST /api/auth/login**
-*   **Descripción:** Autentica a un usuario y devuelve un token de acceso.
-*   **Body (raw/json):**
-    ```json
+ POST /api/login
+  Descripción: Autentica a un usuario y devuelve un token de acceso.
+   Body (raw/json):
+    
     {
         "email": "juan.perez@example.com",
         "password": "password123"
     }
-    ```
-*   **Respuesta Exitosa (200 OK):**
-    ```json
+    
+        Respuesta Exitosa (200 OK):
+    
     {
-        "message": "Login exitoso",
-        "token": "ey..."
+        "message" "Usuario creado con exito",
+        "payload":{
+            "id": "...",    
+            "message": "Login exitoso",
+            "token": "ey..."
+        }
     }
-    ```
+    
 
-### 5.2. Productos (`/api/products`)
+ 5.2. Productos (`/api/products`)
 
-**Nota:** Todas las rutas de productos (excepto GET) requieren un token de autenticación en la cabecera `Authorization: Bearer <token>`.
+Nota:  Las rutas para crear (POST) y eliminas (DELETE) productos requieren un token de autenticacion en la cabecera Authorization: Bearer <token>. 
+Las rutas para obtener productos (GET) son publicas. 
 
-#### **GET /api/products**
-*   **Descripción:** Obtiene una lista de todos los productos.
-*   **Respuesta Exitosa (200 OK):**
-    ```json
+ GET /api/products
+   Descripción: Obtiene una lista de todos los productos.
+  Respuesta Exitosa (200 OK):
+    
     {
+        "message": "Listado de productos",
         "payload": [
-            { "id": "1", "nombre": "Producto 1", "precio": 100, "disponible": true },
-            { "id": "2", "nombre": "Producto 2", "precio": 200, "disponible": false }
+            { "id": "1", "nombre": "Producto 1", ...},
+            { "id": "2", "nombre": "Producto 2", ...}
         ]
     }
-    ```
+    
 
-#### **GET /api/products/:id**
-*   **Descripción:** Obtiene un producto específico por su ID.
-*   **Respuesta Exitosa (200 OK):**
-    ```json
+ GET /api/products/:id
+    Descripción: Obtiene un producto específico por su ID.
+    Respuesta Exitosa (200 OK)
+    
     {
-        "payload": { "id": "1", "nombre": "Producto 1", "precio": 100, "disponible": true }
+        "message": "Producto encontrado",
+        "payload": { "id": "1", "nombre": "Producto 1", ...}
     }
-    ```
+    
 
-#### **POST /api/products**
-*   **Descripción:** Crea un nuevo producto.
-*   **Body (raw/json):**
-    ```json
+POST /api/products/create
+Descripción: Crea un nuevo producto.
+Body (raw/json):
+    
     {
         "nombre": "Producto Nuevo",
         "precio": 150.50,
         "disponible": true
     }
-    ```
-*   **Respuesta Exitosa (201 Created):**
-    ```json
+    
+Respuesta Exitosa (201 Created):
+    
     {
         "message": "Producto creado con exito",
         "payload": { "id": "3", "nombre": "Producto Nuevo", ... }
     }
-    ```
+    
 
-#### **PUT /api/products/:id**
-*   **Descripción:** Actualiza un producto existente por su ID.
-*   **Body (raw/json):**
-    ```json
-    {
-        "precio": 140,
-        "disponible": false
-    }
-    ```
-*   **Respuesta Exitosa (200 OK):**
-    ```json
-    {
-        "message": "Producto actualizado con éxito",
-        "payload": { ...datos del producto actualizado... }
-    }
-    ```
 
-#### **DELETE /api/products/:id**
-*   **Descripción:** Elimina un producto por su ID.
-*   **Respuesta Exitosa (200 OK):**
-    ```json
+DELETE /api/products/:id
+Descripción: Elimina un producto por su ID.
+Respuesta Exitosa (200 OK):
+    
     {
         "message": "Producto eliminado con éxito"
     }
@@ -171,8 +172,30 @@ A continuación se describen los endpoints disponibles.
 
 ---
 
-## 6. Consideraciones Adicionales
+6. Consideraciones Adicionales
 
-*   **Seguridad:** Se utiliza un middleware para verificar el JWT en rutas protegidas, asegurando que solo usuarios autenticados puedan realizar operaciones críticas.
-*   **Manejo de Errores:** La API cuenta con un manejo de errores centralizado que responde con códigos de estado HTTP apropiados y mensajes claros.
-*   **Despliegue:** El proyecto está configurado para un despliegue sencillo en plataformas como Vercel o Heroku (gracias al archivo `vercel.json`).
+-Configuracion de secretos y variables de Entorno:
+Para el desarrollo local, la aplicacion utiliza un archivo .env en la raiz del proyecto para cargar las variables de entorno (como la clave secreta de JWT
+y las credenciales de Firebase).
+Para produccion en Vercel, estas mismas variables de entorno se deben configurar de forma segura a traves del panel de control del proyecto en Vercel.
+
+-Seguridad de la base de Datos (Firestore):
+La seguridad de la base de datos no solo depende de la autenticacion en la API, sino tambien de las reglas de sguridad de Firestore. EStas reglas fueron gestionadas
+directamente en la consola de Firebase y son la capa final de proteccion. Para este proyecto, se configuraron solo para que el backend (usando el Admin SDK) 
+tenga acceso de escritura, lo cual es una practica de seguridad robusta. 
+
+-Manejo de Tokens (JWT):
+El token JWT devuelto en el login tiene un tiempo de expiracion defiunido. La aplicacion cliente es responsable de almacenar este token de forma segura y
+enviarlo en la cabecera Authorization para las rutas protegidas.
+
+
+-Scripts Postman:
+En la raiz encontraras los .json para importar en postman y poder realizar pruebas a la api (productsApi-postman y usersApi-Postman).
+Ademas, te dejo a continuacion la documentacion publica de la API:
+Products:
+https://documenter.getpostman.com/view/43513282/2sB34mgx6Z
+
+Users:
+https://documenter.getpostman.com/view/43513282/2sB34mgx6a
+
+
