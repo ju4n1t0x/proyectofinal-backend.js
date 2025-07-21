@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:1234/api/register",
+			"name": "https://proyectofinal-backend-liart.vercel.app/api/register",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"juani@gmail.com\",\n    \"lastName\": \"juan ignacio\",\n    \"name\": \"sasia\",\n    \"password\": \"3778jusa\"\n}\n\n",
+					"raw": "{\n    \"email\": \"alba@gmail.com\",\n    \"lastName\": \"alba ines\",\n    \"name\": \"violino\",\n    \"password\": \"1111alba\"\n}\n\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -24,12 +24,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:1234/api/register",
-					"protocol": "http",
+					"raw": "https://proyectofinal-backend-liart.vercel.app/api/register",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"proyectofinal-backend-liart",
+						"vercel",
+						"app"
 					],
-					"port": "1234",
 					"path": [
 						"api",
 						"register"
@@ -39,7 +40,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:1234/api/login",
+			"name": "https://proyectofinal-backend-liart.vercel.app/api/login",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -56,12 +57,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:1234/api/login",
-					"protocol": "http",
+					"raw": "https://proyectofinal-backend-liart.vercel.app/api/login",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"proyectofinal-backend-liart",
+						"vercel",
+						"app"
 					],
-					"port": "1234",
 					"path": [
 						"api",
 						"login"

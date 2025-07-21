@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:1234/api/products",
+			"name": "https://proyectofinal-backend-liart.vercel.app/api/products",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -34,12 +34,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:1234/api/products",
-					"protocol": "http",
+					"raw": "https://proyectofinal-backend-liart.vercel.app/api/products",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"proyectofinal-backend-liart",
+						"vercel",
+						"app"
 					],
-					"port": "1234",
 					"path": [
 						"api",
 						"products"
@@ -49,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:1234/api/products/Bfr5M2spRJ4dEfllhDJJ",
+			"name": "https://proyectofinal-backend-liart.vercel.app/api/products/Bfr5M2spRJ4dEfllhDJJ",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -64,12 +65,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:1234/api/products/CfKPotUb9ECgHrEVoOQH",
-					"protocol": "http",
+					"raw": "https://proyectofinal-backend-liart.vercel.app/api/products/CfKPotUb9ECgHrEVoOQH",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"proyectofinal-backend-liart",
+						"vercel",
+						"app"
 					],
-					"port": "1234",
 					"path": [
 						"api",
 						"products",
@@ -80,7 +82,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:1234/api/products/create",
+			"name": "https://proyectofinal-backend-liart.vercel.app/api/products/create",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -125,35 +127,44 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:1234/api/products/7CCacu4YZ7EjGlzOd0SG",
+			"name": "https://proyectofinal-backend-liart.vercel.app/api/products/7CCacu4YZ7EjGlzOd0SG",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
 				},
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik1XYXc2Rmc3ejlTUzNkVmVOWExuIiwiZW1haWwiOiJqdWFuaUBnbWFpbC5jb20iLCJpYXQiOjE3NTIxMTQ2NTQsImV4cCI6MTc1MjExODI1NH0.paQoHV4iCsuZ0Drbgm9qONhcE0jDzeU9qHBW1_1KVCA",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik1XYXc2Rmc3ejlTUzNkVmVOWExuIiwiZW1haWwiOiJqdWFuaUBnbWFpbC5jb20iLCJpYXQiOjE3NTMxMzY4NDMsImV4cCI6MTc1MzE0MDQ0M30.x7eBLYbJmEAVLGSRksU3HvHCLgUuUQKRYI48YwWuAes",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:1234/api/products/7CCacu4YZ7EjGlzOd0SG?Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik1XYXc2Rmc3ejlTUzNkVmVOWExuIiwiZW1haWwiOiJqdWFuaUBnbWFpbC5jb20iLCJpYXQiOjE3NTIxMTQ2NTQsImV4cCI6MTc1MjExODI1NH0.paQoHV4iCsuZ0Drbgm9qONhcE0jDzeU9qHBW1_1KVCA",
-					"protocol": "http",
+					"raw": "https://proyectofinal-backend-liart.vercel.app/api/products/NapNYHGj42r1jneuAIau",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"proyectofinal-backend-liart",
+						"vercel",
+						"app"
 					],
-					"port": "1234",
 					"path": [
 						"api",
 						"products",
-						"7CCacu4YZ7EjGlzOd0SG"
+						"NapNYHGj42r1jneuAIau"
 					],
 					"query": [
 						{
 							"key": "Authorization",
-							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik1XYXc2Rmc3ejlTUzNkVmVOWExuIiwiZW1haWwiOiJqdWFuaUBnbWFpbC5jb20iLCJpYXQiOjE3NTIxMTQ2NTQsImV4cCI6MTc1MjExODI1NH0.paQoHV4iCsuZ0Drbgm9qONhcE0jDzeU9qHBW1_1KVCA"
+							"value": "Bearer ",
+							"disabled": true
 						}
 					]
 				}
