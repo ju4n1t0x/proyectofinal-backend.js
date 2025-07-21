@@ -1,4 +1,7 @@
 
+Ruta de la api
+https://proyectofinal-backend-liart.vercel.app/
+
 # Documentación del Proyecto: API de Gestión de Productos y Usuarios
 
 1. Resumen del Proyecto
