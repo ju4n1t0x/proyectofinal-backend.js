@@ -1,6 +1,5 @@
 
 import {db} from '../config/dotEnv.js';
-import {collection, getDocs, addDoc, query, where} from 'firebase/firestore';
 import bcrypt from 'bcrypt';
 
 
@@ -12,10 +11,10 @@ export class User{
         this.password = password
     }
 
-    static usersCollection = collection(db, 'users');
+    static usersCollection = db.collection('users');
 
     static getAllUsers = async () => {
-        const getAllUsers = await getDocs(usersCollection);
+        const getAllUsers = await this.usersCollection.get();
         const users = getAllUsers.docs.map(doc => ({id: doc.id, ...doc.data}));
         return users;
     };
@@ -38,13 +37,12 @@ export class User{
             password: hashedPassword
         };
 
-        const newUser = await addDoc(this.usersCollection, userToCreate);
+        const newUser = await this.usersCollection.add(userToCreate);
         return {id: newUser.id, ...userToCreate};
     };
 
     static getUsersByEmail = async (email) =>{
-        const q = query(this.usersCollection, where("email", "==", email));
-        const getUsersByEmail = await getDocs(q);
+        const getUsersByEmail = await this.usersCollection.where("email", "==", email).get()
 
         if(getUsersByEmail.empty) {
             return null;

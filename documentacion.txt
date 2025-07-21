@@ -1,0 +1,178 @@
+
+# Documentación del Proyecto: API de Gestión de Productos y Usuarios
+
+## 1. Resumen del Proyecto
+
+Este documento detalla la arquitectura, funcionalidades y endpoints de la API RESTful desarrollada para la gestión de productos y autenticación de usuarios. El objetivo principal del proyecto es proveer una interfaz backend robusta, segura y escalable para una aplicación de comercio electrónico o similar.
+
+---
+
+## 2. Tecnologías Utilizadas
+
+*   **Backend:** Node.js
+*   **Framework:** Express.js
+*   **Base de Datos:** [Indicar la base de datos, ej: MongoDB, Firebase Firestore, PostgreSQL]
+*   **Autenticación:** JSON Web Tokens (JWT)
+*   **Variables de Entorno:** dotenv
+*   **Gestor de Paquetes:** [Indicar npm o pnpm]
+
+---
+
+## 3. Estructura del Proyecto
+
+El proyecto sigue una arquitectura por capas para separar responsabilidades y facilitar el mantenimiento.
+
+```
+/src
+|-- /config -> Configuración central (ej. variables de entorno).
+|-- /controllers -> Lógica de negocio y manejo de peticiones (req, res).
+|-- /middlewares -> Funciones intermedias (ej. autenticación, CORS).
+|-- /models -> Definición de los esquemas de datos.
+|-- /routes -> Definición de las rutas de la API.
+|-- /services -> Lógica de interacción con la base de datos.
+|-- /utils -> Utilidades reutilizables (ej. generador de tokens).
+```
+
+---
+
+## 4. Instalación y Puesta en Marcha
+
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone [URL_DEL_REPOSITORIO]
+    ```
+2.  **Instalar dependencias:**
+    ```bash
+    pnpm install
+    ```
+3.  **Configurar variables de entorno:**
+    Crear un archivo `.env` en la raíz del proyecto y añadir las siguientes variables:
+    ```
+    PORT=8080
+    MONGO_URL=[URL_DE_CONEXION_A_LA_BASE_DE_DATOS]
+    JWT_SECRET_KEY=[UNA_CLAVE_SECRETA_PARA_JWT]
+    ```
+4.  **Iniciar el servidor:**
+    ```bash
+    pnpm start
+    ```
+
+---
+
+## 5. Endpoints de la API
+
+A continuación se describen los endpoints disponibles.
+
+### 5.1. Autenticación (`/api/auth`)
+
+#### **POST /api/auth/register**
+*   **Descripción:** Registra un nuevo usuario en el sistema.
+*   **Body (raw/json):**
+    ```json
+    {
+        "nombre": "Juan Perez",
+        "email": "juan.perez@example.com",
+        "password": "password123"
+    }
+    ```
+*   **Respuesta Exitosa (201 Created):**
+    ```json
+    {
+        "message": "Usuario creado con éxito",
+        "payload": { ...datos del usuario ... }
+    }
+    ```
+
+#### **POST /api/auth/login**
+*   **Descripción:** Autentica a un usuario y devuelve un token de acceso.
+*   **Body (raw/json):**
+    ```json
+    {
+        "email": "juan.perez@example.com",
+        "password": "password123"
+    }
+    ```
+*   **Respuesta Exitosa (200 OK):**
+    ```json
+    {
+        "message": "Login exitoso",
+        "token": "ey..."
+    }
+    ```
+
+### 5.2. Productos (`/api/products`)
+
+**Nota:** Todas las rutas de productos (excepto GET) requieren un token de autenticación en la cabecera `Authorization: Bearer <token>`.
+
+#### **GET /api/products**
+*   **Descripción:** Obtiene una lista de todos los productos.
+*   **Respuesta Exitosa (200 OK):**
+    ```json
+    {
+        "payload": [
+            { "id": "1", "nombre": "Producto 1", "precio": 100, "disponible": true },
+            { "id": "2", "nombre": "Producto 2", "precio": 200, "disponible": false }
+        ]
+    }
+    ```
+
+#### **GET /api/products/:id**
+*   **Descripción:** Obtiene un producto específico por su ID.
+*   **Respuesta Exitosa (200 OK):**
+    ```json
+    {
+        "payload": { "id": "1", "nombre": "Producto 1", "precio": 100, "disponible": true }
+    }
+    ```
+
+#### **POST /api/products**
+*   **Descripción:** Crea un nuevo producto.
+*   **Body (raw/json):**
+    ```json
+    {
+        "nombre": "Producto Nuevo",
+        "precio": 150.50,
+        "disponible": true
+    }
+    ```
+*   **Respuesta Exitosa (201 Created):**
+    ```json
+    {
+        "message": "Producto creado con exito",
+        "payload": { "id": "3", "nombre": "Producto Nuevo", ... }
+    }
+    ```
+
+#### **PUT /api/products/:id**
+*   **Descripción:** Actualiza un producto existente por su ID.
+*   **Body (raw/json):**
+    ```json
+    {
+        "precio": 140,
+        "disponible": false
+    }
+    ```
+*   **Respuesta Exitosa (200 OK):**
+    ```json
+    {
+        "message": "Producto actualizado con éxito",
+        "payload": { ...datos del producto actualizado... }
+    }
+    ```
+
+#### **DELETE /api/products/:id**
+*   **Descripción:** Elimina un producto por su ID.
+*   **Respuesta Exitosa (200 OK):**
+    ```json
+    {
+        "message": "Producto eliminado con éxito"
+    }
+    ```
+
+---
+
+## 6. Consideraciones Adicionales
+
+*   **Seguridad:** Se utiliza un middleware para verificar el JWT en rutas protegidas, asegurando que solo usuarios autenticados puedan realizar operaciones críticas.
+*   **Manejo de Errores:** La API cuenta con un manejo de errores centralizado que responde con códigos de estado HTTP apropiados y mensajes claros.
+*   **Despliegue:** El proyecto está configurado para un despliegue sencillo en plataformas como Vercel o Heroku (gracias al archivo `vercel.json`).

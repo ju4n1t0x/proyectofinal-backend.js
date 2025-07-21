@@ -1,7 +1,7 @@
 import {db} from '../config/dotEnv.js';
-import {collection, getDocs, getDoc, setDoc, deleteDoc, doc, updateDoc} from 'firebase/firestore';
 
-const productsCollection = collection(db, 'products');
+
+const productsCollection = db.collection('products');
 
 
 export class Producto{
@@ -15,30 +15,34 @@ export class Producto{
   
 
 static getAllProducts = async () => {
-    const getAllProducts = await getDocs(productsCollection);
+    const getAllProducts = await productsCollection.get();
     const products = getAllProducts.docs.map(doc => ({id: doc.id, ...doc.data()}));
     return products;
 };
 
 static getProductById = async (id) => {
-    const productById = await getDoc(doc(productsCollection, id));
+    const docRef = productsCollection.doc(id);
+    const productById = await docRef.get();
+    if (!productById.exists) {
+        throw new Error('Producto no encontrado');
+    }
     return productById.data();
 };
 
 static createProduct = async (product) => {
-    if(!product.id){
-        throw new Error('El id del producto es invalido');
-    }
-     await setDoc(doc(productsCollection, product.id.toString()), product);
-    return product;
+    
+    const docRef = await productsCollection.add(product);
+    return {id: docRef.id, ...product};
 };
 
 static deleteProduct = async (id) =>{
-    const productById = await getDoc(doc(productsCollection, id));
-    if(!productById.exists()){
-        throw new Error('Producto no encontrado');
+    const docRef = productsCollection.doc(id);
+    const productById = await docRef.get();
+
+    if(!productById.exists){
+        return false;
     }
-    await deleteDoc(doc(productsCollection, id));
+    await docRef.delete();
     return true;
 };
 

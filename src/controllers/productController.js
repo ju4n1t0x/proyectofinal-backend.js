@@ -58,11 +58,13 @@ static createProduct = async (req, res) => {
 
 static deleteProduct = async (req, res) => {
     try{
-        const product = await ProductService.deleteProduct(req.params.id);
-        if (!product) {
+        const productDeleted = await ProductService.deleteProduct(req.params.id);
+
+        if (!productDeleted) {
             return res.status(400).json({message: "Producto no encontrado"});
         }
-        res.status(200).json({message: "Producto eliminado con exito", payload: product});
+
+        res.status(200).json({message: "Producto eliminado con exito"});
     }catch (error){
         res
         .status(500)
